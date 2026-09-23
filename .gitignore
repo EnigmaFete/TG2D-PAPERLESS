@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+consume/*
+!consume/.gitkeep
+export/*
+!export/.gitkeep
