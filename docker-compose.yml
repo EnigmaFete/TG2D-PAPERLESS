@@ -1,0 +1,102 @@
+# ==============================================================================
+# TG2D UNIFIED MONOREPO ORCHESTRATION (WEBSITE + PAPERLESS GED)
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # 1. TG2D LUXURY WEBSITE (STATIC ARCHITECTURAL SHOWCASE)
+  # ----------------------------------------------------------------------------
+  website:
+    image: nginx:alpine
+    container_name: tg2d-website
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./apps/website:/usr/share/nginx/html:ro
+    networks:
+      - tg2d-network
+
+  # ----------------------------------------------------------------------------
+  # 2. TG2D DOCUMENT MANAGEMENT SYSTEM (PAPERLESS-NGX)
+  # ----------------------------------------------------------------------------
+  broker:
+    image: docker.io/valkey/valkey:9-alpine
+    container_name: tg2d-broker
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+    networks:
+      - tg2d-network
+
+  db:
+    image: docker.io/library/postgres:18
+    container_name: tg2d-db
+    restart: unless-stopped
+    volumes:
+      - pgdata:/var/lib/postgresql
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: paperless
+    networks:
+      - tg2d-network
+
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: tg2d-paperless-webserver
+    restart: unless-stopped
+    depends_on:
+      - db
+      - broker
+      - gotenberg
+      - tika
+    ports:
+      - "8001:8000"
+    volumes:
+      - data:/usr/src/paperless/data
+      - media:/usr/src/paperless/media
+      - ./apps/paperless-ged/export:/usr/src/paperless/export
+      - ./apps/paperless-ged/consume:/usr/src/paperless/consume
+      - ./apps/paperless-ged/branding:/usr/src/paperless/branding:ro
+      - ./apps/paperless-ged/branding/apply-branding.sh:/custom-cont-init.d/01-branding.sh:ro
+    env_file: ./apps/paperless-ged/docker-compose.env
+    environment:
+      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_DBHOST: db
+      PAPERLESS_DBENGINE: postgresql
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+      PAPERLESS_APP_LOGO: "/static/logo.png"
+      PAPERLESS_APP_TITLE: "T.G.2.D"
+    networks:
+      - tg2d-network
+
+  gotenberg:
+    image: docker.io/gotenberg/gotenberg:8.37
+    container_name: tg2d-gotenberg
+    restart: unless-stopped
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+    networks:
+      - tg2d-network
+
+  tika:
+    image: docker.io/apache/tika:3.3.1.0
+    container_name: tg2d-tika
+    restart: unless-stopped
+    networks:
+      - tg2d-network
+
+networks:
+  tg2d-network:
+    driver: bridge
+
+volumes:
+  data:
+  media:
+  pgdata:
+  redisdata:

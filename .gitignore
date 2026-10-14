@@ -1,6 +1,22 @@
+# OS & Editor
 .DS_Store
+Thumbs.db
+*.swp
 *.log
-consume/*
-!consume/.gitkeep
-export/*
-!export/.gitkeep
+
+# Monorepo Archives & Scratch
+*.zip
+*.tar.gz
+scratch_*.png
+
+# Website specific raw asset dumps (exclude uncompressed raw frames)
+apps/website/ezgif-*-png-split/
+apps/website/scroll animation/
+apps/website/*.pdf
+apps/website/WhatsApp*
+
+# Paperless GED local data & mounts
+apps/paperless-ged/consume/*
+!apps/paperless-ged/consume/.gitkeep
+apps/paperless-ged/export/*
+!apps/paperless-ged/export/.gitkeep
