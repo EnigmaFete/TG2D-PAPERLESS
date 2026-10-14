@@ -41,6 +41,7 @@ services:
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
       PAPERLESS_APP_LOGO: "/static/logo.png"
+      PAPERLESS_APP_TITLE: "T.G.2.D"
 
   gotenberg:
     image: docker.io/gotenberg/gotenberg:8.37
