@@ -1,0 +1,34 @@
+name: Auto-Deploy Website to NindoHost
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "apps/website/**"
+      - ".github/workflows/deploy.yml"
+
+jobs:
+  deploy:
+    name: Sync Website to public_html
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Sync files to NindoHost FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: apps/website/
+          server-dir: public_html/
+          exclude: |
+            **/.git*
+            **/.git*/**
+            ezgif*/**
+            *.pdf
+            scroll animation/**
