@@ -6159,6 +6159,179 @@ main .fleet-editorial-layout .spec-key,
   }
 }
 
+/* ---------------- SECTION: POURQUOI TG2D & CHIFFRES CLÉS (MOBILE-FRIENDLY) ---------------- */
+.sec-pourquoi-ui {
+  padding: 100px 0;
+  background: #080D18;
+  color: #FFFFFF;
+}
+
+.pourquoi-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.pourquoi-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.pourquoi-points-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.pourquoi-point-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.pourquoi-point-num {
+  color: var(--c-cyan-light, #00C2FF);
+  font-weight: 800;
+  font-size: 1.1rem;
+  font-family: var(--font-mono, monospace);
+  min-width: 24px;
+}
+
+.pourquoi-point-title {
+  color: #FFFFFF;
+  font-size: 1.05rem;
+  display: block;
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.pourquoi-point-desc {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.pourquoi-right-card {
+  background: #0E1626;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.pourquoi-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.pourquoi-stat-box {
+  padding-bottom: 18px;
+}
+
+.pourquoi-stat-box.has-border {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pourquoi-stat-val-cyan {
+  font-size: 2.3rem;
+  font-weight: 800;
+  color: var(--c-cyan-light, #00C2FF);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+
+.pourquoi-stat-val-white {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+
+.pourquoi-stat-label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+/* Responsive adjustments for Pourquoi section */
+@media (max-width: 1024px) {
+  .sec-pourquoi-ui {
+    padding: 80px 0;
+  }
+  .pourquoi-grid {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+  .pourquoi-right-card {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sec-pourquoi-ui {
+    padding: 60px 0;
+  }
+  .pourquoi-grid {
+    gap: 36px;
+  }
+  .pourquoi-right-card {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+  .pourquoi-stats-grid {
+    gap: 18px;
+  }
+  .pourquoi-stat-val-cyan {
+    font-size: 1.95rem;
+  }
+  .pourquoi-stat-val-white {
+    font-size: 1.45rem;
+  }
+  .pourquoi-stat-label {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sec-pourquoi-ui {
+    padding: 50px 0;
+  }
+  .pourquoi-point-item {
+    gap: 12px;
+  }
+  .pourquoi-point-num {
+    font-size: 0.95rem;
+  }
+  .pourquoi-point-title {
+    font-size: 0.98rem;
+  }
+  .pourquoi-point-desc {
+    font-size: 0.85rem;
+  }
+  .pourquoi-right-card {
+    padding: 20px 16px;
+  }
+  .pourquoi-stats-grid {
+    gap: 14px;
+  }
+  .pourquoi-stat-val-cyan {
+    font-size: 1.7rem;
+  }
+  .pourquoi-stat-val-white {
+    font-size: 1.25rem;
+  }
+  .pourquoi-stat-label {
+    font-size: 0.76rem;
+  }
+}
+
 /* ---------------- SECTION 06: CTA BANNER ("VOUS AVEZ UN PROJET ?") ---------------- */
 .sec-cta-banner-ui {
   position: relative;
