@@ -6041,33 +6041,121 @@ main .fleet-editorial-layout .spec-key,
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-  .eng-cards-row-top {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .eng-split-cards-row {
-    grid-template-columns: 1fr;
-  }
-  .eng-values-row-bottom {
-    grid-template-columns: 1fr;
-    gap: 24px;
+  .sec-engagement-ui {
+    padding: 80px 0 90px;
   }
   .sec-engagement-ui::before,
   .sec-engagement-ui::after {
     display: none;
   }
+  .eng-cards-row-top {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .eng-split-cards-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .eng-values-row-bottom {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .sec-engagement-ui {
+    padding: 60px 0 70px;
+  }
+  .eng-main-title {
+    font-size: 1.85rem;
+  }
+  .eng-main-subtitle {
+    font-size: 0.95rem;
+    margin-bottom: 36px;
+  }
   .eng-cards-row-top {
     grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .eng-top-card {
+    padding: 24px 20px 22px;
+  }
+  .eng-split-cards-row {
+    gap: 16px;
+    margin-bottom: 28px;
   }
   .eng-split-card {
-    flex-direction: column;
+    flex-direction: row;
+    align-items: stretch;
   }
   .eng-split-thumb {
-    width: 100%;
-    min-width: 100%;
-    height: 140px;
+    width: 95px;
+    min-width: 95px;
+  }
+  .eng-split-body {
+    padding: 16px 16px;
+  }
+  .eng-values-row-bottom {
+    gap: 20px;
+    padding: 0;
+  }
+  .eng-value-item {
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .eng-value-icon {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+  }
+  .eng-value-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sec-engagement-ui {
+    padding: 50px 0 60px;
+  }
+  .eng-main-title {
+    font-size: 1.55rem;
+    line-height: 1.25;
+  }
+  .eng-top-card {
+    padding: 20px 18px 20px;
+  }
+  .eng-top-card-header {
+    margin-bottom: 14px;
+  }
+  .eng-top-card-title {
+    font-size: 1.05rem;
+  }
+  .eng-top-card-desc {
+    font-size: 0.85rem;
+    margin-bottom: 18px;
+  }
+  .eng-split-thumb {
+    width: 80px;
+    min-width: 80px;
+  }
+  .eng-split-body {
+    padding: 14px 12px;
+  }
+  .eng-split-title {
+    font-size: 0.88rem;
+  }
+  .eng-split-desc {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+  .eng-value-title {
+    font-size: 0.88rem;
+  }
+  .eng-value-desc {
+    font-size: 0.8rem;
+    line-height: 1.45;
   }
 }
 
