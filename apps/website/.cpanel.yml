@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/$USER/public_html
-    - /bin/rsync -av --exclude='.git*' --exclude='ezgif*' --exclude='*.pdf' --exclude='*.zip' --exclude='scroll animation' ./ $DEPLOYPATH/

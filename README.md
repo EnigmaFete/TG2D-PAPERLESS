@@ -1,81 +1,65 @@
-# TG2D — Écosystème Logiciel Unifié (Monorepo)
+# TG2D - Système de Gestion Électronique des Documents (GED)
 
-Dépôt centralisé regroupant les deux plateformes logicielles de l'entreprise **TG2D (Travaux Généraux de Développement Durable)** :
-1. **`apps/website`** : Site web vitrine institutionnel et interactif (Architecture tous corps d'état, moteur 3D 300 frames, 31 pages de réalisations et expertises).
-2. **`apps/paperless-ged`** : Système de Gestion Électronique des Documents (GED / EDM) propulsé par Paperless-ngx, Docker, Tesseract OCR et branding sur-mesure TG2D.
-
----
-
-## Architecture du Dépôt
-
-```text
-TG2D-ECOSYSTEM/
-├── apps/
-│   ├── website/              # Site Vitrine Officiel TG2D (HTML5 / Vanilla CSS / JS)
-│   │   ├── index.html
-│   │   ├── a-propos.html, expertises.html, projets.html, flotte.html, contact.html
-│   │   ├── styles.css & app.js
-│   │   ├── assets/           # Photographies chantiers, logos officiels
-│   │   ├── scroll-frames-webp/ # Séquence 300-frames haute performance
-│   │   ├── .htaccess         # Configuration NindoHost (HTTPS force, cache LiteSpeed/Apache)
-│   │   └── .cpanel.yml       # Déploiement cPanel Git Version Control
-│   │
-│   └── paperless-ged/        # Plateforme GED Documentaire TG2D (Paperless-ngx)
-│       ├── docker-compose.yml
-│       ├── docker-compose.env & .env
-│       ├── branding/         # Logos TG2D, favicon, script apply-branding.sh
-│       ├── consume/          # Répertoire d'ingestion automatique des PDF / factures
-│       └── export/           # Répertoire d'export sécurisé
-│
-├── docker-compose.yml        # Orchestrateur global multi-conteneurs
-├── Makefile                  # Commandes d'exécution rapides (make up, make website, make ged)
-└── .github/workflows/deploy.yml # Pipeline CI/CD GitHub Actions
-```
+> **TG2D · Bâtissons pour l'avenir durable**  
+> Solution d'archivage documentaire intelligent, indexation OCR multilingue (Français & Anglais) et gestion multi-clients propulsée par Paperless-ngx.
 
 ---
 
-## Démarrage Rapide
+## 🏗️ Architecture & Services
 
-### 1. Lancer l'ensemble des deux logiciels (Recommandé)
-```bash
-make up
-# ou : docker compose up -d
-```
-* **Site Web TG2D** : [http://localhost:8080](http://localhost:8080)
-* **Portail GED Paperless** : [http://localhost:8001](http://localhost:8001)
+La stack Docker se compose de 5 conteneurs orchestrés :
 
-### 2. Lancer uniquement le Site Web Vitrine
-```bash
-make website
-# ou : docker compose up -d website
-```
-Le site est immédiatement accessible sur [http://localhost:8080](http://localhost:8080).
-
-### 3. Lancer uniquement la GED Paperless
-```bash
-make ged
-# ou : docker compose up -d broker db gotenberg tika webserver
-```
-La GED est immédiatement accessible sur [http://localhost:8001](http://localhost:8001).
-
-### 4. Arrêter tous les services
-```bash
-make down
-```
+1. **`webserver`** (Paperless-ngx v3.2+) : Serveur web d'application, OCR et recherche plein texte.
+2. **`db`** (PostgreSQL 18) : Base de données relationnelle sécurisée.
+3. **`broker`** (Valkey / Redis) : File d'attente de tâches asynchrones pour le traitement OCR.
+4. **`tika`** (Apache Tika 3.3+) : Extraction et indexation de texte depuis les documents Office (.docx, .xlsx, .pptx).
+5. **`gotenberg`** (Gotenberg 8.37) : Conversion de formats et rendu HTML/PDF/emails (.eml).
 
 ---
 
-## Déploiement en Production
+## 🚀 Démarrage Rapide
 
-### Déploiement du Site Web (`apps/website`) sur NindoHost :
-* **Méthode ZIP** : Téléversez le fichier `tg2d-nindohost-deploy.zip` généré à partir de `apps/website/` dans `public_html/`.
-* **Méthode Git Version Control** : Clonez le dépôt et spécifiez le chemin `apps/website/` dans le fichier `.cpanel.yml`.
-* **Méthode GitHub Actions** : Configurez vos secrets FTP sur GitHub (`FTP_SERVER`, `FTP_USERNAME`, `FTP_PASSWORD`) pour un déploiement continu à chaque commit sur `main`.
+### 1. Prérequis
+- Docker Desktop ou Docker Engine
+- Docker Compose
 
-### Déploiement de la GED (`apps/paperless-ged`) sur VPS Cloud :
-* Cloner ce dépôt sur votre VPS Linux (Ubuntu / Debian).
-* Naviguer dans le dossier ou lancer depuis la racine :
-  ```bash
-  docker compose up -d
-  ```
-* Configurer un reverse proxy Nginx avec certificat SSL (Let's Encrypt) pointant vers `ged.tg2d-maroc.com`.
+### 2. Lancement des Services
+```bash
+# Démarrer la stack en arrière-plan
+docker compose up -d
+
+# Vérifier le statut des conteneurs
+docker compose ps
+
+# Consulter les logs en direct
+docker compose logs -f webserver
+```
+
+### 3. Accès Web
+Ouvrez votre navigateur :  
+👉 **[http://localhost:8001](http://localhost:8001)**
+
+---
+
+## 🎨 Personnalisation & Identité Visuelle TG2D
+
+Le dossier `branding/` contient :
+- **`logo.png`** : Logo principal TG2D.
+- **`icon-192.png` & `icon-512.png`** : Icônes d'application et favicon.
+- **`apply-branding.sh`** : Script d'injection automatique au démarrage du conteneur appliquant la palette cyan électrique (`#02c5f1`) et le thème sobre à fort contraste.
+
+---
+
+## 👥 Gestion Multi-Clients
+
+Pour attribuer des documents spécifiques à chaque client :
+1. Rendez-vous dans **Paramètres > Utilisateurs & Groupes**.
+2. Créez un utilisateur ou un groupe pour chaque client.
+3. Configurez les permissions de visibilité (**Owner / Propriétaire**) ou automatisez via les **Flux de travail (Workflows)**.
+
+---
+
+## 📁 Répertoire de Consommation Automatique
+
+Déposez simplement vos fichiers (PDF, scans, images, factures) dans :
+- **`consume/`** : Paperless les analysera, les indexera automatiquement et les archivera.
