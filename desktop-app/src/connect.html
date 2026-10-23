@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TG2D - Connexion au Serveur GED</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background: radial-gradient(circle at 50% 20%, #102435 0%, #09131b 80%, #050b10 100%);
+      color: #ffffff;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      overflow: hidden;
+    }
+    .container {
+      width: 100%;
+      max-width: 480px;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: rgba(16, 33, 46, 0.85);
+      border: 1px solid rgba(2, 197, 241, 0.35);
+      border-radius: 20px;
+      padding: 38px 30px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(2, 197, 241, 0.15);
+      animation: fadeIn 0.4s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .logo-container {
+      margin-bottom: 24px;
+    }
+    .logo {
+      max-width: 250px;
+      height: auto;
+      filter: drop-shadow(0 4px 16px rgba(2, 197, 241, 0.4));
+    }
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+    p.subtitle {
+      font-size: 0.9rem;
+      color: #8da4b5;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #8da4b5;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .input-wrapper {
+      position: relative;
+    }
+    input[type="text"] {
+      width: 100%;
+      background: #0f1c26;
+      border: 1px solid #233b4e;
+      border-radius: 10px;
+      color: #ffffff;
+      font-size: 1rem;
+      padding: 12px 14px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    input[type="text"]:focus {
+      border-color: #02c5f1;
+      box-shadow: 0 0 0 3px rgba(2, 197, 241, 0.25);
+    }
+    .quick-chips {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+    .chip {
+      background: rgba(2, 197, 241, 0.1);
+      border: 1px solid rgba(2, 197, 241, 0.3);
+      color: #02c5f1;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .chip:hover {
+      background: rgba(2, 197, 241, 0.25);
+    }
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    button {
+      flex: 1;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      outline: none;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #02c5f1 0%, #00b4d8 100%);
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 16px rgba(2, 197, 241, 0.4);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #00d4ff 0%, #02c5f1 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(2, 197, 241, 0.6);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #284459;
+      color: #8da4b5;
+    }
+    .btn-secondary:hover {
+      border-color: #02c5f1;
+      color: #ffffff;
+    }
+    .status-box {
+      margin-top: 20px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      display: none;
+    }
+    .status-box.error {
+      display: block;
+      background: rgba(220, 53, 69, 0.18);
+      border: 1px solid #dc3545;
+      color: #ff9d9d;
+    }
+    .status-box.success {
+      display: block;
+      background: rgba(40, 167, 69, 0.18);
+      border: 1px solid #28a745;
+      color: #79f395;
+    }
+    .footer-help {
+      margin-top: 24px;
+      font-size: 0.78rem;
+      color: #5c7486;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="logo-container">
+        <img src="../assets/logo.png" class="logo" alt="TG2D" />
+      </div>
+      <h2>Connexion au Serveur</h2>
+      <p class="subtitle">Indiquez l'adresse IP du serveur TG2D situé dans votre bureau</p>
+
+      <div class="form-group">
+        <label for="serverUrl">Adresse du Serveur</label>
+        <div class="input-wrapper">
+          <input type="text" id="serverUrl" placeholder="http://192.168.1.50:8000" spellcheck="false" />
+        </div>
+        <div class="quick-chips">
+          <span class="chip" onclick="setPreset('http://localhost:8000')">Ce PC (localhost:8000)</span>
+          <span class="chip" onclick="setPreset('http://tg2d-server.local:8000')">Nom local (:8000)</span>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn-secondary" id="btnTest" onclick="testConnection()">Tester</button>
+        <button class="btn-primary" id="btnConnect" onclick="connect()">Se connecter</button>
+      </div>
+
+      <div id="statusBox" class="status-box"></div>
+
+      <div class="footer-help">
+        💡 L'adresse IP est affichée dans la fenêtre noire du PC serveur TG2D au bureau (ex: <code>http://192.168.1.X:8000</code>).
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const serverInput = document.getElementById('serverUrl');
+    const statusBox = document.getElementById('statusBox');
+    const btnConnect = document.getElementById('btnConnect');
+    const btnTest = document.getElementById('btnTest');
+
+    // Récupérer les paramètres passés dans l'URL
+    const params = new URLSearchParams(window.location.search);
+    const initialUrl = params.get('url');
+    const initialError = params.get('error');
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      if (window.tg2dAPI) {
+        const config = await window.tg2dAPI.getConfig();
+        serverInput.value = initialUrl || config.serverUrl || 'http://localhost:8000';
+      } else {
+        serverInput.value = initialUrl || 'http://localhost:8000';
+      }
+
+      if (initialError) {
+        showStatus('Le serveur est actuellement inaccessible. Vérifiez que le PC serveur au bureau est allumé.', 'error');
+      }
+    });
+
+    function setPreset(url) {
+      serverInput.value = url;
+    }
+
+    function showStatus(message, type) {
+      statusBox.textContent = message;
+      statusBox.className = 'status-box ' + type;
+    }
+
+    async function testConnection() {
+      const url = serverInput.value.trim();
+      if (!url) {
+        showStatus('Veuillez saisir une adresse.', 'error');
+        return;
+      }
+      btnTest.disabled = true;
+      btnTest.textContent = 'Test...';
+
+      try {
+        if (window.tg2dAPI) {
+          const res = await window.tg2dAPI.testConnection(url);
+          if (res.ok) {
+            showStatus('✓ Connexion réussie au serveur TG2D !', 'success');
+          } else {
+            showStatus('Impossible de joindre le serveur. Code: ' + (res.status || res.error || 'Erreur réseau'), 'error');
+          }
+        }
+      } catch (err) {
+        showStatus('Erreur : ' + err.message, 'error');
+      } finally {
+        btnTest.disabled = false;
+        btnTest.textContent = 'Tester';
+      }
+    }
+
+    async function connect() {
+      const url = serverInput.value.trim();
+      if (!url) {
+        showStatus('Veuillez saisir une adresse valide.', 'error');
+        return;
+      }
+      btnConnect.disabled = true;
+      btnConnect.textContent = 'Connexion...';
+
+      if (window.tg2dAPI) {
+        await window.tg2dAPI.saveAndConnect(url);
+      }
+    }
+
+    serverInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        connect();
+      }
+    });
+  </script>
+</body>
+</html>

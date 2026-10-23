@@ -4,3 +4,6 @@ consume/*
 !consume/.gitkeep
 export/*
 !export/.gitkeep
+node_modules/
+desktop-app/node_modules/
+desktop-app/dist/
