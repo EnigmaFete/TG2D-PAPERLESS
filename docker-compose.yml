@@ -61,10 +61,15 @@ services:
     image: docker.io/apache/tika:3.3.1.0
     restart: unless-stopped
 
-  tunnel:
-    image: docker.io/cloudflare/cloudflared:latest
+  ngrok:
+    image: docker.io/ngrok/ngrok:latest
     restart: unless-stopped
-    command: tunnel --no-autoupdate --protocol http2 --url http://webserver:8000
+    command:
+      - "http"
+      - "webserver:8000"
+      - "--url=https://gauging-isolated-widely.ngrok-free.dev"
+    environment:
+      NGROK_AUTHTOKEN: "3L12NdPvbmnlplkSNgjB81mr8V7_7w2MLzVuMX45sayBErg21"
     depends_on:
       - webserver
 
