@@ -55,6 +55,13 @@ services:
     image: docker.io/apache/tika:3.3.1.0
     restart: unless-stopped
 
+  tunnel:
+    image: docker.io/cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate --url http://webserver:8000
+    depends_on:
+      - webserver
+
 volumes:
   data:
   media:

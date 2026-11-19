@@ -3,539 +3,111 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TG2D · Système de Gestion Électronique des Documents (GED)</title>
-  <meta name="description" content="Solution d'archivage documentaire intelligent, indexation OCR multilingue (Français & Anglais) et gestion multi-clients propulsée par Paperless-ngx pour TG2D.">
+  <title>TG2D · Connexion GED Paperless-ngx</title>
   
+  <!-- Immediate Redirect to Live Paperless Instance -->
+  <meta http-equiv="refresh" content="0; url=https://executives-refused-stating-tsunami.trycloudflare.com">
+  <script>
+    window.location.replace("https://executives-refused-stating-tsunami.trycloudflare.com");
+  </script>
+
   <!-- Open Graph / Meta -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://enigmafete.github.io/TG2D-PAPERLESS/">
-  <meta property="og:title" content="TG2D · GED d'Entreprise Souveraine">
-  <meta property="og:description" content="Solution d'archivage documentaire intelligent, indexation OCR et gestion multi-clients. Déploiement Docker ou Bare-Metal Windows sans abonnement SaaS.">
+  <meta property="og:title" content="TG2D · Connexion GED">
+  <meta property="og:description" content="Accès à la plateforme de Gestion Électronique des Documents TG2D.">
   <meta property="og:image" content="assets/logo.png">
 
   <!-- Icons -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    body {
+      background: radial-gradient(circle at 50% 20%, #102435 0%, #09131b 80%, #050b10 100%);
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .card {
+      background: rgba(16, 33, 46, 0.85);
+      border: 1px solid rgba(2, 197, 241, 0.35);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(2, 197, 241, 0.15);
+      backdrop-filter: blur(20px);
+    }
+    .logo {
+      max-width: 220px;
+      height: auto;
+      margin-bottom: 1.5rem;
+      filter: drop-shadow(0 4px 16px rgba(2, 197, 241, 0.4));
+    }
+    .spinner {
+      width: 42px;
+      height: 42px;
+      border: 3px solid rgba(2, 197, 241, 0.2);
+      border-top-color: #02c5f1;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 1.25rem auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+    p {
+      color: #8da4b5;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-bottom: 1.5rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #02c5f1;
+      color: #031520;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px rgba(2, 197, 241, 0.35);
+    }
+    .btn:hover {
+      background: #38d5f7;
+      transform: translateY(-1px);
+    }
+  </style>
 </head>
 <body>
-
-  <!-- Background Ambient Glow -->
-  <div class="ambient-glow" aria-hidden="true"></div>
-
-  <!-- Header -->
-  <header class="site-header">
-    <div class="header-container">
-      <a href="#" class="brand-link" aria-label="TG2D Accueil">
-        <img src="assets/logo.png" alt="Logo TG2D" class="brand-logo" width="160" height="42">
-        <span class="brand-badge">GED GED</span>
-      </a>
-
-      <nav class="site-nav" aria-label="Navigation principale">
-        <ul class="nav-list">
-          <li><a href="#features" class="nav-link">Fonctionnalités</a></li>
-          <li><a href="#demo" class="nav-link">Démo Interactive</a></li>
-          <li><a href="#architecture" class="nav-link">Architecture</a></li>
-          <li><a href="#deployment" class="nav-link">Déploiement</a></li>
-          <li><a href="#desktop" class="nav-link">App Bureau</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-actions">
-        <a href="https://github.com/EnigmaFete/TG2D-PAPERLESS" target="_blank" rel="noopener noreferrer" class="btn btn-outline github-btn">
-          <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-          </svg>
-          <span>GitHub</span>
-        </a>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero Section -->
-  <main>
-    <section class="hero-section">
-      <div class="container hero-container">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span class="badge-dot"></span>
-            <span>GED d'Entreprise Souveraine · Propulsée par Paperless-ngx</span>
-          </div>
-
-          <h1 class="hero-title">
-            Archivage & Recherche Documentaire <span class="text-cyan">Intelligente</span>
-          </h1>
-
-          <p class="hero-subtitle">
-            Système tout-en-un de gestion électronique des documents pour TG2D. Indexation OCR multilingue instantanée, classement multi-clients sécurisé et application native Windows/Mac. Zéro abonnement SaaS, maîtrise totale de vos données.
-          </p>
-
-          <div class="hero-cta-group">
-            <a href="#deployment" class="btn btn-primary">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-              <span>Déployer la Solution</span>
-            </a>
-            <a href="#demo" class="btn btn-secondary">
-              <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                <polygon points="5 3 19 12 5 21 5 3"/>
-              </svg>
-              <span>Essayer le Simulateur</span>
-            </a>
-          </div>
-
-          <div class="hero-stats">
-            <div class="stat-item">
-              <span class="stat-number">0 €</span>
-              <span class="stat-label">Coût SaaS mensuel</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">100%</span>
-              <span class="stat-label">Données en local</span>
-            </div>
-            <div class="stat-item">
-              <span class="stat-number">OCR 5</span>
-              <span class="stat-label">Indexation plein texte</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Interactive Preview Box -->
-        <div class="hero-preview" id="demo">
-          <div class="preview-window">
-            <div class="window-header">
-              <div class="window-controls">
-                <span class="dot red"></span>
-                <span class="dot yellow"></span>
-                <span class="dot green"></span>
-              </div>
-              <div class="window-title">
-                <span class="server-status-pill"></span>
-                TG2D Document Explorer (Port 8001)
-              </div>
-              <div class="window-actions">
-                <span class="user-pill">Admin TG2D</span>
-              </div>
-            </div>
-
-            <div class="window-body">
-              <!-- Search bar inside preview -->
-              <div class="preview-search-bar">
-                <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <input 
-                  type="text" 
-                  id="demo-search-input" 
-                  placeholder="Rechercher par mot-clé (ex: facture, devis, béton, 2026)..."
-                  aria-label="Recherche démo"
-                >
-                <span class="search-badge" id="demo-count">4 documents</span>
-              </div>
-
-              <!-- Filter tags -->
-              <div class="preview-tags" id="demo-filter-tags">
-                <button type="button" class="filter-chip active" data-tag="all">Tous</button>
-                <button type="button" class="filter-chip" data-tag="Factures">Factures</button>
-                <button type="button" class="filter-chip" data-tag="Devis">Devis</button>
-                <button type="button" class="filter-chip" data-tag="Chantiers">Chantiers</button>
-                <button type="button" class="filter-chip" data-tag="Technique">Technique</button>
-              </div>
-
-              <!-- Document List -->
-              <div class="document-stream" id="demo-document-stream">
-                <!-- Injected via JS -->
-              </div>
-            </div>
-
-            <div class="window-footer">
-              <span>Moteur OCR : Apache Tika 3.3 + Tesseract v5 (FR/EN)</span>
-              <span class="status-live">Synchronisé</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key Features Section -->
-    <section class="section features-section" id="features">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-tag">Performances & Souveraineté</span>
-          <h2 class="section-title">Conçu pour les exigences du BTP et de l'Industrie</h2>
-          <p class="section-subtitle">
-            Une architecture robuste pour traiter des milliers de plans, devis, factures et documents réglementaires en toute confidentialité.
-          </p>
-        </div>
-
-        <div class="features-grid">
-          <article class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" y1="13" x2="8" y2="13"></line>
-                <line x1="16" y1="17" x2="8" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-            </div>
-            <h3 class="feature-title">Indexation OCR Multilingue</h3>
-            <p class="feature-desc">
-              Reconnaissance optique haute précision pour PDF scannés, fichiers Office (.docx, .xlsx, .pptx) et images via Tesseract & Apache Tika.
-            </p>
-            <ul class="feature-points">
-              <li>Recherche instantanée dans le texte des scans</li>
-              <li>Reconnaissance automatique Français & Anglais</li>
-              <li>Extraction de métadonnées et dates</li>
-            </ul>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Cloisonnement Multi-Clients</h3>
-            <p class="feature-desc">
-              Ségrégation stricte des documents par client, chantier ou sous-traitant avec gestion fine des droits de lecture et d'écriture.
-            </p>
-            <ul class="feature-points">
-              <li>Attribution de propriétaire (Owner) par dossier</li>
-              <li>Workflows automatiques selon l'émetteur</li>
-              <li>Vues personnalisées par département</li>
-            </ul>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                <line x1="8" y1="21" x2="16" y2="21"></line>
-                <line x1="12" y1="17" x2="12" y2="21"></line>
-              </svg>
-            </div>
-            <h3 class="feature-title">Application Bureau Dédiée</h3>
-            <p class="feature-desc">
-              Une application desktop moderne (Windows & macOS) permettant aux collaborateurs de naviguer dans la GED sans passer par un navigateur externe.
-            </p>
-            <ul class="feature-points">
-              <li>Mémorisation sécurisée de l'adresse IP bureau</li>
-              <li>Raccourcis rapides & interface plein écran</li>
-              <li>Installateurs .exe et .dmg prêts à l'emploi</li>
-            </ul>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-              </svg>
-            </div>
-            <h3 class="feature-title">Consommation Automatique</h3>
-            <p class="feature-desc">
-              Déposez vos scans dans le répertoire <code>consume/</code> ou configurez votre scanner de bureau pour y envoyer directement les fichiers.
-            </p>
-            <ul class="feature-points">
-              <li>Surveillance en temps réel du dossier partagé</li>
-              <li>Traitement asynchrone non bloquant</li>
-              <li>Suppression sécurisée du fichier source traité</li>
-            </ul>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <h3 class="feature-title">Souveraineté & Sécurité</h3>
-            <p class="feature-desc">
-              Vos documents ne transitent par aucun cloud tiers. Hébergement 100% interne sur votre matériel au bureau ou en datacenter privé.
-            </p>
-            <ul class="feature-points">
-              <li>Aucun abonnement récurrent ou surcoût de stockage</li>
-              <li>Sauvegarde intégrale en 1 commande</li>
-              <li>Conformité RGPD et conservation des données</li>
-            </ul>
-          </article>
-
-          <article class="feature-card">
-            <div class="feature-icon">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-            </div>
-            <h3 class="feature-title">Branding TG2D Intégré</h3>
-            <p class="feature-desc">
-              Habillage visuel complet aux couleurs de TG2D : thème sobre à haut contraste, accents cyan électrique (#02c5f1) et logos haute résolution.
-            </p>
-            <ul class="feature-points">
-              <li>Injection CSS automatique dans Paperless</li>
-              <li>Favicons et icônes d'application synchronisés</li>
-              <li>Navigation ergonomique optimisée pour l'équipe</li>
-            </ul>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- Architecture Section -->
-    <section class="section architecture-section" id="architecture">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-tag">Infrastructure Technique</span>
-          <h2 class="section-title">Une Architecture Modulaire & Éprouvée</h2>
-          <p class="section-subtitle">
-            5 micro-services orchestrés en conteneurs ou exécutés en natif bare-metal sur votre réseau local d'entreprise.
-          </p>
-        </div>
-
-        <div class="architecture-diagram">
-          <div class="arch-col">
-            <div class="arch-box input-box">
-              <span class="arch-step">Source</span>
-              <h4>Numérisation & Scans</h4>
-              <p>Scanners réseau, e-mails (.eml), glisser-déposer dans <code>consume/</code></p>
-            </div>
-          </div>
-
-          <div class="arch-arrow">➔</div>
-
-          <div class="arch-col arch-core">
-            <div class="arch-box core-box">
-              <span class="arch-step">Orchestrateur</span>
-              <h4>Paperless Webserver</h4>
-              <p>Django + Granian Core · API REST · UI Web TG2D</p>
-              <div class="sub-services">
-                <span class="service-pill">PostgreSQL 18</span>
-                <span class="service-pill">Valkey 9 (Redis)</span>
-                <span class="service-pill">Apache Tika 3.3</span>
-                <span class="service-pill">Gotenberg 8.37</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="arch-arrow">➔</div>
-
-          <div class="arch-col">
-            <div class="arch-box output-box">
-              <span class="arch-step">Destination</span>
-              <h4>Accès & Exploitation</h4>
-              <p>Recherche plein texte · App Bureau TG2D · Navigateurs équipe sur LAN</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Deployment Guide (Tabs) -->
-    <section class="section deployment-section" id="deployment">
-      <div class="container">
-        <div class="section-header text-center">
-          <span class="section-tag">Guide d'Installation</span>
-          <h2 class="section-title">Choisissez votre Méthode de Déploiement</h2>
-          <p class="section-subtitle">
-            Déployez selon vos préférences : conteneurs Docker pour l'isolation complète ou installation Windows directe sans Docker.
-          </p>
-        </div>
-
-        <!-- Accessible Tabs Component -->
-        <div class="tabs-container">
-          <div class="tablist" focusgroup="tablist nomemory" aria-label="Options de déploiement" role="tablist">
-            <button 
-              type="button" 
-              role="tab" 
-              id="tab-docker" 
-              class="tab-btn" 
-              aria-selected="true" 
-              aria-controls="panel-docker"
-              focusgroupstart
-            >
-              🐳 Option 1 : Docker Compose (Recommandé)
-            </button>
-            <button 
-              type="button" 
-              role="tab" 
-              id="tab-windows" 
-              class="tab-btn" 
-              aria-selected="false" 
-              aria-controls="panel-windows"
-            >
-              🖥️ Option 2 : PC Serveur Windows (0 Docker, 0 VPS)
-            </button>
-          </div>
-
-          <!-- Tab Panel 1: Docker -->
-          <div 
-            id="panel-docker" 
-            role="tabpanel" 
-            aria-labelledby="tab-docker" 
-            class="tab-panel"
-            tabindex="0"
-          >
-            <div class="panel-content">
-              <div class="guide-steps">
-                <div class="guide-step">
-                  <div class="step-num">1</div>
-                  <div class="step-details">
-                    <h4>Cloner le dépôt et entrer dans le dossier</h4>
-                    <p>Récupérez le projet et ses configurations complètes de conteneurs :</p>
-                    <div class="code-block">
-                      <code>git clone https://github.com/EnigmaFete/TG2D-PAPERLESS.git
-cd TG2D-PAPERLESS</code>
-                      <button type="button" class="copy-btn" data-copy="git clone https://github.com/EnigmaFete/TG2D-PAPERLESS.git && cd TG2D-PAPERLESS" aria-label="Copier la commande">Copier</button>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="guide-step">
-                  <div class="step-num">2</div>
-                  <div class="step-details">
-                    <h4>Démarrer la stack de 5 micro-services</h4>
-                    <p>Paperless, PostgreSQL, Valkey, Gotenberg et Tika sont automatiquement instanciés :</p>
-                    <div class="code-block">
-                      <code>docker compose up -d</code>
-                      <button type="button" class="copy-btn" data-copy="docker compose up -d" aria-label="Copier la commande">Copier</button>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="guide-step">
-                  <div class="step-num">3</div>
-                  <div class="step-details">
-                    <h4>Accéder à l'interface TG2D</h4>
-                    <p>Ouvrez votre navigateur web sur le port configuré :</p>
-                    <div class="code-block">
-                      <code>http://localhost:8001</code>
-                      <button type="button" class="copy-btn" data-copy="http://localhost:8001" aria-label="Copier le lien">Copier</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tab Panel 2: Windows Bare-metal -->
-          <div 
-            id="panel-windows" 
-            role="tabpanel" 
-            aria-labelledby="tab-windows" 
-            class="tab-panel" 
-            hidden="until-found"
-          >
-            <div class="panel-content">
-              <div class="guide-steps">
-                <div class="guide-step">
-                  <div class="step-num">1</div>
-                  <div class="step-details">
-                    <h4>Préparer le PC Serveur Windows au Bureau</h4>
-                    <p>Sur n'importe quel PC Windows 10/11 ou Windows Server connecté au réseau de l'entreprise, copiez le dossier <code>windows-host/</code>.</p>
-                  </div>
-                </div>
-
-                <div class="guide-step">
-                  <div class="step-num">2</div>
-                  <div class="step-details">
-                    <h4>Lancer l'installation automatique en 1 clic</h4>
-                    <p>Clic droit sur <strong><code>install.bat</code></strong> &gt; <strong>Exécuter en tant qu'administrateur</strong>. Le script configure SQLite, installe Tesseract et applique le thème TG2D.</p>
-                  </div>
-                </div>
-
-                <div class="guide-step">
-                  <div class="step-num">3</div>
-                  <div class="step-details">
-                    <h4>Démarrage et accès partagé équipe</h4>
-                    <p>Double-cliquez sur <strong><code>start-server.bat</code></strong>. L'adresse IP locale s'affiche instantanément :</p>
-                    <div class="code-block">
-                      <code>http://192.168.1.X:8000</code>
-                      <button type="button" class="copy-btn" data-copy="http://192.168.1.X:8000" aria-label="Copier l'URL">Copier</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Desktop App Section -->
-    <section class="section desktop-section" id="desktop">
-      <div class="container">
-        <div class="desktop-card">
-          <div class="desktop-info">
-            <span class="section-tag">Expérience Collaborateur</span>
-            <h2 class="section-title">Application de Bureau TG2D</h2>
-            <p>
-              Distribuez l'application bureau à l'ensemble des collaborateurs sur Windows et macOS. L'application mémorise l'adresse IP du serveur de bureau et offre une interface dédiée sans barre d'adresse ni onglets distrayants.
-            </p>
-            <div class="desktop-features">
-              <div class="d-feat">✓ Reconnexion automatique au démarrage</div>
-              <div class="d-feat">✓ Notifications système de traitement OCR</div>
-              <div class="d-feat">✓ Packaging autonome (.exe / .dmg)</div>
-            </div>
-            <div class="desktop-cta">
-              <a href="https://github.com/EnigmaFete/TG2D-PAPERLESS/tree/main/desktop-app" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                Consulter les sources Desktop (Electron)
-              </a>
-            </div>
-          </div>
-          <div class="desktop-preview-visual">
-            <img src="assets/pin-badge.png" alt="Insigne TG2D" class="badge-img" width="280" height="280">
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container footer-container">
-      <div class="footer-brand">
-        <img src="assets/logo.png" alt="TG2D Logo" width="140" height="36">
-        <p class="footer-tagline">Bâtissons pour l'avenir durable.</p>
-      </div>
-
-      <div class="footer-links">
-        <div class="link-group">
-          <h5>Navigation</h5>
-          <a href="#features">Fonctionnalités</a>
-          <a href="#architecture">Architecture</a>
-          <a href="#deployment">Déploiement</a>
-          <a href="#desktop">App Bureau</a>
-        </div>
-        <div class="link-group">
-          <h5>Ressources</h5>
-          <a href="https://github.com/EnigmaFete/TG2D-PAPERLESS" target="_blank" rel="noopener noreferrer">Dépôt GitHub</a>
-          <a href="https://github.com/paperless-ngx/paperless-ngx" target="_blank" rel="noopener noreferrer">Paperless-ngx Core</a>
-          <a href="https://github.com/EnigmaFete/TG2D-PAPERLESS/blob/main/DEPLOYMENT_GUIDE.md" target="_blank" rel="noopener noreferrer">Guide de Déploiement</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="container footer-bottom-inner">
-        <p>© 2026 TG2D · Tous droits réservés. Propulsé par Paperless-ngx sous licence open source.</p>
-        <p class="repo-badge">Dépôt : <code>EnigmaFete/TG2D-PAPERLESS</code></p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Toast Notification -->
-  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
-
-  <!-- Scripts -->
-  <script src="app.js"></script>
+  <div class="card">
+    <img src="assets/logo.png" alt="TG2D Logo" class="logo">
+    <div class="spinner"></div>
+    <h1>Connexion à la GED TG2D</h1>
+    <p>Redirection sécurisée en cours vers votre serveur Paperless...</p>
+    <a href="https://executives-refused-stating-tsunami.trycloudflare.com" class="btn">
+      Accéder à la connexion directe →
+    </a>
+  </div>
 </body>
 </html>
